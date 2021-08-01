@@ -21,7 +21,7 @@
 
 Enter your choice: 3
 ```
-3. `vagrant init centos/7`を実行して設定ファイルを作成する
+3. `vagrant init centos/7`を実行してVagrantfileという設定ファイルを作成する
 4. Vagrantfileの編集
     - `config.vm.network "forwarded_port", guest: 80, host: 8080`をコメントイン
         - ゲストOSに80番のポートでデータが来たらそれをホストOSの8080へ転送する設定
@@ -35,5 +35,7 @@ Enter your choice: 3
     ```
 5. `vagrant up`でゲストOSの起動
 6. `vagrant ssh`でゲストOSへログイン
+
+### PHPのインストール
 
 
