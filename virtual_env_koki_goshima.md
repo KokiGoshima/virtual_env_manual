@@ -55,4 +55,18 @@ Enter your choice: 3
     - `sudo mv composer.phar /usr/local/bin/composer`を実行
         - composerコマンドがどのディレクトリでも使えるようにパスを通す
 
+### Nginxのインストール
+1. `/etc/yum.repos.d/`に`nginx.repo`というファイルを作成
+2. `nginx.repo`に以下を追記
+```
+[nginx]
+name=nginx repo
+baseurl=https://nginx.org/packages/mainline/centos/\$releasever/\$basearch/
+gpgcheck=0
+enabled=1
+```
+3. `sudo yum install -y nginx`を実行してNginxをインストール
+4. `sudo systemctl start nginx`でNginxを起動
+5. `sudo systemctl status nginx`でNginxが起動していることを確認
+
 
