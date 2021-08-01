@@ -37,5 +37,22 @@ Enter your choice: 3
 6. `vagrant ssh`でゲストOSへログイン
 
 ### PHPのインストール
+1. `sudo yum -y install epel-release wget`
+    - `remi-release-7.rpm`と依存関係にある`epel-release`というパッケージをインストール
+2. `sudo wget http://rpms.famillecollet.com/enterprise/remi-release-7.rpm`
+    - `remi-release-7.rpm`ファイルをダウンロード
+3. `sudo rpm -Uvh remi-release-7.rpm`
+    - `remi-release-7.rpm`をインストール
+4. `sudo yum -y install --enablerepo=remi-php72 php php-pdo php-mysqlnd php-mbstring php-xml php-fpm php-common php-devel php-mysql unzip`
+    - PHPのインストールと、PHPアプリケーションを動かす上で必要となるモジュールをインストール
+5. composerのインストール
+    - 以下の実行
+    ```
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    php composer-setup.php
+    php -r "unlink('composer-setup.php');"
+    ```
+    - `sudo mv composer.phar /usr/local/bin/composer`を実行
+        - composerコマンドがどのディレクトリでも使えるようにパスを通す
 
 
