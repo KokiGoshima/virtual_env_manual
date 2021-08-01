@@ -66,7 +66,58 @@ gpgcheck=0
 enabled=1
 ```
 3. `sudo yum install -y nginx`を実行してNginxをインストール
-4. `sudo systemctl start nginx`でNginxを起動
-5. `sudo systemctl status nginx`でNginxが起動していることを確認
+4. Nginxの設定ファイルを編集
+    - /etc/nginx/conf.d/default.confを開く
+    - 以下のように編集
+    ```
+    server {
+    listen       80;
+    server_name  192.168.33.10; # Vagranfileでコメントを外した箇所のipアドレスを記述してください。
+    # ApacheのDocumentRootにあたります
+    root /vagrant/laravel_app/public; # 追記
+    index  index.html index.htm index.php; # 追記
+
+    #charset koi8-r;
+    #access_log  /var/log/nginx/host.access.log  main;
+
+    location / {
+        #root   /usr/share/nginx/html; # コメントアウト
+        #index  index.html index.htm;  # コメントアウト
+        try_files $uri $uri/ /index.php$is_args$args;  # 追記
+    }
+
+    # 省略
+
+    # 該当箇所のコメントを解除し、必要な箇所には変更を加える
+    # 下記は root を除いたlocation { } までのコメントが解除されていることを確認してください。
+
+    location ~ \.php$ {
+    #    root           html;
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  /$document_root/$fastcgi_script_name;  # $fastcgi_script_name以前を /$document_root/に変更
+        include        fastcgi_params;
+    }
+
+    # 省略
+    ```
+5. `/etc/php-fpm.d/www.conf`を以下のように編集
+```
+;24行目近辺
+user = apache
+# ↓ 以下に編集
+user = nginx
+
+group = apache
+# ↓ 以下に編集
+group = nginx
+```
+6. nginx のユーザーでもlaravel_app下のログファイルへの書き込みができる権限を付与
+```
+cd /vagrant/laravel_app
+$ sudo chmod -R 777 storage
+```
+7. `sudo systemctl start nginx`でNginxを起動
+8. `sudo systemctl status nginx`でNginxが起動していることを確認
 
 
