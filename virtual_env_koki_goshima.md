@@ -55,6 +55,11 @@ Enter your choice: 3
     - `sudo mv composer.phar /usr/local/bin/composer`を実行
         - composerコマンドがどのディレクトリでも使えるようにパスを通す
 
+### Laravelのインストール
+1. `vagrant init`を実行したディレクトリの直下に任意の名前でディレクトリを作成/移動
+2. laravelをインストール
+    - `composer create-project --prefer-dist laravel/laravel 1で作成したディレクトリ名 "6.0"`
+
 ### Nginxのインストール
 1. `/etc/yum.repos.d/`に`nginx.repo`というファイルを作成
 2. `nginx.repo`に以下を追記
