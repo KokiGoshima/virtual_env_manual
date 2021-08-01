@@ -66,7 +66,7 @@ Enter your choice: 3
 5. デフォルトのPassnの確認
     - `sudo cat /var/log/mysqld.log | grep 'temporary password'`を実行
     - `generated for root@localhost: ~~`の`~`がPass
-6.mysqlへログイン
+6. mysqlへログイン
     - `mysql -u root -p`を実行
     - 5のPassを入力
 7. Passのリセット
@@ -77,9 +77,15 @@ Enter your choice: 3
     - `create database 任意の名前;`を実行
 
 ### Laravelのインストール
-1. `vagrant init`を実行したディレクトリの直下に任意の名前でディレクトリを作成/移動
+1. /vagrantディレクトリの直下に任意の名前でディレクトリを作成/移動
 2. laravelをインストール
     - `composer create-project --prefer-dist laravel/laravel 1で作成したディレクトリ名 "6.0"`
+3. `laravel_app/.env`を以下のように編集
+```
+DB_DATABASE=Mysqlのインストールの8で作成したDB名
+DB_USERNAME=root
+DB_PASSWORD=Mysqlのインストールの7で設定したPass
+```
 
 ### Nginxのインストール
 1. `/etc/yum.repos.d/`に`nginx.repo`というファイルを作成
