@@ -55,6 +55,27 @@ Enter your choice: 3
     - `sudo mv composer.phar /usr/local/bin/composer`を実行
         - composerコマンドがどのディレクトリでも使えるようにパスを通す
 
+## Mysqlのインストール
+1. `sudo wget https://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm`を実行
+    - mysql5.7をダウンロード
+2. `sudo rpm -Uvh mysql57-community-release-el7-7.noarch.rpm`を実行
+    - mysql5.7のパッケージを最新にアップデート
+3. `sudo yum install -y mysql-community-server`を実行
+    - mysql5.7のパッケージをインストール
+4. `sudo systemctl start mysqld`でmysqlの起動
+5. デフォルトのPassnの確認
+    - `sudo cat /var/log/mysqld.log | grep 'temporary password'`を実行
+    - `generated for root@localhost: ~~`の`~`がPass
+6.mysqlへログイン
+    - `mysql -u root -p`を実行
+    - 5のPassを入力
+7. Passのリセット
+    - `set password = "新たなpassword";`を実行
+    - `exit`
+    - `sudo systemctl restart mysqld`でMySQLサーバの再起動
+8. DBの作成
+    - `create database 任意の名前;`を実行
+
 ### Laravelのインストール
 1. `vagrant init`を実行したディレクトリの直下に任意の名前でディレクトリを作成/移動
 2. laravelをインストール
