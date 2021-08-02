@@ -152,5 +152,3 @@ $ sudo chmod -R 777 storage
 7. `sudo systemctl start nginx`でNginxを起動
 8. `sudo systemctl start php-fpm`でfpmを起動
 9. `sudo systemctl status nginx`でNginxが起動していることを確認
-
-
